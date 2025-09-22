@@ -11,10 +11,7 @@
 	
 ## Circuit Diagram:
 
- 
-
-
-
+<img width="1036" height="597" alt="image" src="https://github.com/user-attachments/assets/2d6cca6e-b829-4701-8cd2-149756b3f652" />
 
 ## Theory :
  The Arduino Uno is powered by the ATmega328P, an 8-bit microcontroller that runs at 16 MHz. It has 32 KB of flash memory, 2 KB of SRAM, and 1 KB of EEPROM. The board 
@@ -58,9 +55,70 @@ Step 7: Save Your Work
 
 ## Program:
 
+#include <LiquidCrystal.h>
+LiquidCrystal lcd(5,6,8,9,10,11);
+  
+int redled = 2;
+int greenled = 3;
+int buzzer = 4;
+int sensor = A0;
+int sensorThresh = 400;
+
+void setup()
+{
+pinMode(redled, OUTPUT);
+pinMode(greenled,OUTPUT);
+pinMode(buzzer,OUTPUT);
+pinMode(sensor,INPUT);
+Serial.begin(9600);
+lcd.begin(16,2);
+
+}
+
+void loop()
+{
+   
+  int analogValue = analogRead(sensor);
+  Serial.print(analogValue);
+  if(analogValue>sensorThresh)
+  {
+    digitalWrite(redled,HIGH);
+    digitalWrite(greenled,LOW);
+    tone(buzzer,1000,10000);
+    lcd.clear();
+    lcd.setCursor(0,1);
+    lcd.print("ALERT");
+    delay(1000);
+    lcd.clear();
+    lcd.setCursor(0,1);
+    lcd.print("RUN REBISHA RUN");
+    delay(1000);
+  }
+  else
+  {
+    digitalWrite(greenled,HIGH);
+    digitalWrite(redled,LOW);
+    noTone(buzzer);
+    lcd.clear();
+    lcd.setCursor(0,0);
+    lcd.print("  Supervised By");
+    lcd.setCursor(0,1);
+    lcd.print(" Rebisha");
+    delay(2000);
+    lcd.clear();
+    lcd.setCursor(0,0);
+    lcd.print("Hello");
+    delay(1000);
+    lcd.clear();
+    lcd.setCursor(0,1);
+    lcd.print("Rebisha");
+    delay(1000);
+  }  
+     
+}
 ## Output:
 
-   
+https://github.com/user-attachments/assets/ab5a22ba-8352-4471-b964-4e5ec0c4c94b
 
 ## Result:
-
+GAS-LEAK-DETECTION-SYSTEM-USING-GAS-SENSOR using tinkercad is executed successfully.
